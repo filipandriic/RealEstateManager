@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="form-wrapper col-sm-12">
+            <div class="white-panel col-sm-8 col-md-6 col-lg-4">
+                <div class="form-show col-sm-12">
+                    <h2>REGISTER</h2>
+                    <input type='text' name='firstname' [(ngModel)]='first_name' placeholder="First name"
+                        class="form-input">
+                    <input type='text' name='lastname' [(ngModel)]='last_name' placeholder="Last name"
+                        class="form-input">
+                    <input type='text' name='username' [(ngModel)]='username' placeholder="Username" class="form-input">
+                    <input type='password' name='password' [(ngModel)]='password' placeholder="Password"
+                        class="form-input">
+                    <input type='password' name='confirm_password' [(ngModel)]='confirm_password'
+                        placeholder="Confirm password" class="form-input">
+                    <input type='text' name='city' [(ngModel)]='city' placeholder="City" class="form-input">
+                    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name='date'
+                        [(ngModel)]='birthday' placeholder="Birthday" class="form-input">
+                    <input type='text' name='phone' [(ngModel)]='phone' placeholder="Phone" class="form-input">
+                    <input type='email' name='email' [(ngModel)]='email' placeholder="Email" class="form-input">
+                    <label for="is_agent_checkbox" class="checkbox_input"
+                        [ngClass]="{'green_button': is_agent==true }">Agent</label>
+                    <input id="is_agent_checkbox" type='checkbox' name='type' [(ngModel)]='is_agent'
+                        style="display: none;">
+
+                    <select name="" id="" [(ngModel)]='agency' class="form-input" *ngIf='is_agent == true'>
+                        <option value="" disabled selected>Agency</option>
+                        <option value="">None</option>
+                        <option *ngFor='let a of all_agencies' value='{{a.name}}'>{{a.name}}</option>
+                    </select>
+                    <input type="text" [(ngModel)]='license' placeholder="License number" class="form-input"
+                        *ngIf='is_agent == true'>
+
+                    <div class="col-sm-12">
+                        <form #form="ngForm">
+                            <div class="row mt-3">
+                                <div class="col-sm-12 mb-2">
+                                    <re-captcha id="recaptcha" name="recaptcha" #recaptcha="ngModel" [(ngModel)]="token"
+                                        required
+                                        [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)">
+                                    </re-captcha>
+                                    <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="recaptcha.errors?.['required']">{{set_message("Please check
+                                            reCAPTCHA.")}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 mb-2">
+                                    <input id="profile_pic" type="file" (change)='on_image_select($event)'
+                                        placeholder="Add profile picture" style="display: none;">
+                                    <label for="profile_pic" class="file_input">{{image_select}}</label>
+                                    <button (click)='register(form)' class="form-button">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <span class="error">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

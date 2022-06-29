@@ -1,0 +1,235 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" routerLink='/buyer'>KupujemProdajem.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink='/buyer'>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='/buyer/favourites'>Favourites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='/buyer/info'>Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="form-wrapper col-sm-12 outer">
+            <div class="white-panel col-sm-3 col-md-3 col-lg-3 users-window">
+                <div class="form-show col-sm-12 users-show">
+                    <div class="flexy">
+                        <h2>SEARCH</h2>
+                    </div>
+                    <hr>
+                    <div style="padding-bottom: 50px;">
+
+                        <div class="flexy">
+                            <input type="number" name="" id="" placeholder="Price from" [(ngModel)]="price_from"
+                                (change)="search()" class="form-input">
+                            <input type="number" name="" id="" placeholder="Price to" [(ngModel)]="price_to"
+                                (change)="search()" class="form-input">
+                        </div>
+                        <div class="flexy">
+                            <input type="number" name="" id="" placeholder="Area from" [(ngModel)]="area_from"
+                                (change)="search()" class="form-input">
+                            <input type="number" name="" id="" placeholder="Area to" [(ngModel)]="area_to"
+                                (change)="search()" class="form-input">
+                        </div>
+                        <div class="flexy">
+                            <input type="number" name="" id="" placeholder="Rooms from" [(ngModel)]="rooms_from"
+                                (change)="search()" class="form-input">
+                            <input type="number" name="" id="" placeholder="Rooms to" [(ngModel)]="rooms_to"
+                                (change)="search()" class="form-input">
+                        </div>
+                        <div class="flexy">
+                            <input type="number" name="" id="" placeholder="Construction year from"
+                                [(ngModel)]="construction_year_from" (change)="search()" class="form-input">
+                            <input type="number" name="" id="" placeholder="Construction year to"
+                                [(ngModel)]="construction_year_to" (change)="search()" class="form-input">
+                        </div>
+
+                        <hr>
+                        <div>
+                            <label for="" style="width: 100%;">Advertiser</label>
+                            <div class="characteristics">
+                                <label for="agency" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_advertiser('agency')==true }">Agency</label>
+                                <input type="checkbox" name="" id="agency" value="agency"
+                                    (change)="add_advertiser('agency')" style="display: none;">
+
+                                <label for="owner" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_advertiser('owner')==true }">Owner</label>
+                                <input type="checkbox" name="" id="owner" value="owner"
+                                    (change)="add_advertiser('owner')" style="display: none;">
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <label for="" style="width: 100%;">State</label>
+                            <div class="characteristics">
+                                <label for="source" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_state('source')==true }">Source</label>
+                                <input type="checkbox" name="" id="source" value="source" (change)="add_state('source')" style="display: none;">
+
+                                <label for="renovated" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_state('renovated')==true }">Renovated</label>
+                                <input type="checkbox" name="" id="renovated" value="renovated" (change)="add_state('renovated')" style="display: none;">
+
+                                <label for="lux" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_state('lux')==true }">LUX</label>
+                                <input type="checkbox" name="" id="lux" value="lux" (change)="add_state('lux')" style="display: none;">
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="flexy">
+                            <input type="number" name="" id="" placeholder="Floor from" [(ngModel)]="floor_from"
+                                (change)="search()" class="form-input">
+                            <input type="number" name="" id="" placeholder="Floor to" [(ngModel)]="floor_to"
+                                (change)="search()" class="form-input">
+                        </div>
+
+                        <hr>
+
+                        <div>
+                            <label for="" style="width: 100%;">Heating</label>
+                            <div class="characteristics">
+
+                                <label for="cg" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_heating('cg')==true }">CG</label>
+                                <input type="checkbox" name="" id="cg" value="cg" (change)="add_heating('cg')" style="display: none;">
+
+                                <label for="eg" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_heating('eg')==true }">EG</label>
+                                <input type="checkbox" name="" id="eg" value="eg" (change)="add_heating('eg')" style="display: none;">
+
+                                <label for="ta" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_heating('ta')==true }">TA</label>
+                                <input type="checkbox" name="" id="ta" value="ta" (change)="add_heating('ta')" style="display: none;">
+
+                                <label for="gas" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_heating('gas')==true }">Gas</label>
+                                <input type="checkbox" name="" id="gas" value="gas" (change)="add_heating('gas')" style="display: none;">
+
+                                <label for="floor" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_heating('floor')==true }">Floor</label>
+                                <input type="checkbox" name="" id="floor" value="floor" (change)="add_heating('floor')" style="display: none;">
+
+                                <label for="heating pumps" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_heating('heating pumps')==true }">Heating pumps</label>
+                                <input type="checkbox" name="" id="heating pumps" value="heating pumps" (change)="add_heating('heating pumps')" style="display: none;">
+
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="flexy">
+                            <input type="number" name="" id="" placeholder="Monthly utilities from"
+                                [(ngModel)]="monthly_utilities_from" (change)="search()" class="form-input">
+                            <input type="number" name="" id="" placeholder="Monthly utilities to"
+                                [(ngModel)]="monthly_utilities_to" (change)="search()" class="form-input">
+                        </div>
+
+                        <div class="characteristics">
+                            <div *ngFor='let c of all_characteristics'>
+                                <label for="{{c.name}}" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_characteristic(c.name)==true }">{{c.name}}</label>
+                                <input type="checkbox" id="{{c.name}}" value="{{c.name}}"
+                                    (change)='add_characteristic(c.name)' style="display: none;">
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="panel-wrap col-sm-8 col-md-8 col-lg-8 users-window" style="background: rgb(224, 224, 224);">
+                <h2 style="width: 100%;">RESULTS</h2>
+                <hr>
+                <div *ngFor='let rs of real_estates'>
+                    <div class="white-panel users-window col-sm-12 col-md-12 col-lg-12">
+                        <div class="real_estate_info col-sm-12 col-md-12 col-lg-12">
+                            <div class="col-sm-4 col-md-4 users-show">
+                                <ngb-carousel>
+                                    <ng-template ngbSlide *ngFor='let img of rs.images'>
+                                        <img [src]="img" alt="">
+                                    </ng-template>
+                                </ngb-carousel>
+                            </div>
+                            <div class="real_estate_text col-sm-2 col-md-2 col-lg-2">
+
+                                <input type="text" name="" id="rs_name" [disabled]='true' [(ngModel)]='rs.name'
+                                    class="form-input">
+                                <label for="rs_name">Type</label>
+
+
+                                <input type="number" name="" id="rs_area" [disabled]='true' [(ngModel)]='rs.area'
+                                    class="form-input">
+                                <label for="rs_area">Area</label>
+
+
+                                <input type="number" name="" id="rs_rooms" [disabled]='true' [(ngModel)]='rs.rooms'
+                                    class="form-input">
+                                <label for="rs_rooms">Rooms</label>
+
+
+                            </div>
+                            <div class="real_estate_text col-sm-2 col-md-2 col-lg-2">
+
+                                <input type="text" name="" id="rs_city" [disabled]='true' [(ngModel)]='rs.city'
+                                    class="form-input">
+                                <label for="rs_city">City</label>
+
+
+                                <input type="text" name="" id="rs_municipality" [disabled]='true'
+                                    [(ngModel)]='rs.municipality' class="form-input">
+                                <label for="rs_municipality">Municipality</label>
+
+
+                                <input type="text" name="" id="rs_microlocation" [disabled]='true'
+                                    [(ngModel)]='rs.microlocation' class="form-input">
+                                <label for="rs_microlocation">Microlocation</label>
+
+                            </div>
+                            <div class="real_estate_text col-sm-2 col-md-2 col-lg-2">
+
+                                <input type="text" name="" id="rs_state" [disabled]='true' [(ngModel)]='rs.state'
+                                    class="form-input">
+                                <label for="rs_state">State</label>
+
+
+                                <input type="number" name="" id="rs_floor" [disabled]='true' [(ngModel)]='rs.floor'
+                                    class="form-input">
+                                <label for="rs_floor">Floor</label>
+
+                                <input type="number" name="" id="rs_price" [disabled]='true'
+                                [ngModel]="calc_average_price(rs)" class="form-input">
+                                <label for="rs_price">Average price per square</label>
+                            </div>
+                        </div>
+                        <div class="real_estate_bottom col-sm-12 col-md-12 col-lg-12">
+                            <hr>
+                            <button (click)="view_more(rs)" class="form-button">View more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

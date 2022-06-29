@@ -1,0 +1,155 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" routerLink='/admin'>KupujemProdajem.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink='/admin'>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='users'>Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="form-wrapper col-sm-12 outer">
+            <div class="col-sm-8 col-md-6 col-lg-4 vertical_outer">
+                <div class="col-sm-12 col-md-12 col-lg-12 white-panel users-window">
+                    <div class="form-show col-sm-12 users-show">
+                        <h2>USERS</h2>
+                        <hr>
+                        <div *ngFor='let u of all_users' class="outer col-sm-12">
+                            <div class="col-sm-2"><img [src]="u.image" alt=""></div>
+                            <div class="col-sm-2">{{u.first_name}} {{u.last_name}}</div>
+                            <div class="col-sm-2">@{{u.username}}</div>
+                            <div class="col-sm-2">{{u.type}}</div>
+                            <div class="col-sm-2">
+                                <button (click)='enable_edit(u.username)' class="form-button button">Edit</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button (click)='delete(u.username)' class="form-button button">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="white-panel users-window col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-show col-sm-12 users-show">
+                        <h2>PENDING USERS</h2>
+                        <hr>
+                        <div *ngFor='let u of pending_users' class="outer col-sm-12">
+                            <div class="col-sm-2"><img [src]="u.image" alt=""></div>
+                            <div class="col-sm-2">{{u.first_name}} {{u.last_name}}</div>
+                            <div class="col-sm-2">@{{u.username}}</div>
+                            <div class="col-sm-2">{{u.type}}</div>
+                            <div class="col-sm-2">
+                                <button (click)='accept(u.username)' class="form-button button">Accept</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button (click)='reject(u.username)' class="form-button button">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="white-panel col-sm-4 col-md-6 col-lg-4" *ngIf="edit_user==false; else edit_window">
+                <div class="form-show col-sm-12">
+                    <h2>ADD USER</h2>
+                    <input type='text' name='firstname' [(ngModel)]='first_name' placeholder="First name"
+                        class="form-input">
+                    <input type='text' name='lastname' [(ngModel)]='last_name' placeholder="Last name"
+                        class="form-input">
+                    <input type='text' name='username' [(ngModel)]='username' placeholder="Username" class="form-input">
+                    <input type='password' name='password' [(ngModel)]='password' placeholder="Password"
+                        class="form-input">
+                    <input type='password' name='confirm_password' [(ngModel)]='confirm_password'
+                        placeholder="Confirm password" class="form-input">
+                    <input type='text' name='city' [(ngModel)]='city' placeholder="City" class="form-input">
+                    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name='date'
+                        [(ngModel)]='birthday' placeholder="Birthday" class="form-input">
+                    <input type='text' name='phone' [(ngModel)]='phone' placeholder="Phone" class="form-input">
+                    <input type='email' name='email' [(ngModel)]='email' placeholder="Email" class="form-input">
+                    <label for="is_agent_checkbox" class="checkbox_input"
+                        [ngClass]="{'green_button': is_agent==true }">Agent</label>
+                    <input id="is_agent_checkbox" type='checkbox' name='type' [(ngModel)]='is_agent'
+                        style="display: none;">
+
+                    <select name="" id="" [(ngModel)]='agency' class="form-input" *ngIf='is_agent == true'>
+                        <option value="" disabled selected>Agency</option>
+                        <option *ngFor='let a of all_agencies' value='{{a.name}}'>{{a.name}}</option>
+                    </select>
+                    <input type="text" [(ngModel)]='license' placeholder="License number" class="form-input"
+                        *ngIf='is_agent == true'>
+
+                    <div class="row">
+                        <div class="col-sm-12 mb-2">
+                            <input id="profile_pic" type="file" (change)='on_image_select($event)'
+                                placeholder="Add profile picture" style="display: none;">
+                            <label for="profile_pic" class="file_input">{{image_select}}</label>
+                            <button (click)='register()' class="form-button">Register</button>
+                        </div>
+                    </div>
+
+
+                    <span class="error">{{message}}</span>
+                </div>
+            </div>
+
+            <ng-template #edit_window>
+                <div class="white-panel col-sm-8 col-md-6 col-lg-4" *ngIf="edit_user==true">
+                    <div class="form-show col-sm-12">
+                        <h2>EDIT USER</h2>
+                        <input type='text' name='firstname' [(ngModel)]='first_name' placeholder="First name"
+                            class="form-input">
+                        <input type='text' name='lastname' [(ngModel)]='last_name' placeholder="Last name"
+                            class="form-input">
+                        <input type='text' name='username' [(ngModel)]='username' placeholder="Username"
+                            class="form-input">
+                        <input type='password' name='password' [(ngModel)]='password' placeholder="Password"
+                            class="form-input">
+                        <input type='password' name='confirm_password' [(ngModel)]='confirm_password'
+                            placeholder="Confirm password" class="form-input">
+                        <input type='text' name='city' [(ngModel)]='city' placeholder="City" class="form-input">
+                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name='date'
+                            [(ngModel)]='birthday' placeholder="Birthday" class="form-input">
+                        <input type='text' name='phone' [(ngModel)]='phone' placeholder="Phone" class="form-input">
+                        <input type='email' name='email' [(ngModel)]='email' placeholder="Email" class="form-input">
+                        <label for="is_agent_checkbox" class="checkbox_input"
+                            [ngClass]="{'green_button': is_agent==true }">Agent</label>
+                        <input id="is_agent_checkbox" type='checkbox' name='type' [(ngModel)]='is_agent'
+                            style="display: none;">
+
+                        <select name="" id="" [(ngModel)]='agency' class="form-input" *ngIf='is_agent == true'>
+                            <option value="" disabled selected>Agency</option>
+                            <option *ngFor='let a of all_agencies' value='{{a.name}}'>{{a.name}}</option>
+                        </select>
+                        <input type="text" [(ngModel)]='license' placeholder="License number" class="form-input"
+                            *ngIf='is_agent == true'>
+
+                        <div class="row">
+                            <div class="col-sm-12 mb-2">
+                                <input id="profile_pic" type="file" (change)='on_image_select($event)'
+                                    placeholder="Add profile picture" style="display: none;">
+                                <label for="profile_pic" class="file_input">{{image_select}}</label>
+                                <button (click)='edit()' class="form-button">Edit</button>
+                            </div>
+                        </div>
+
+                        <span class="error">{{message}}</span>
+                    </div>
+                </div>
+            </ng-template>
+
+        </div>
+    </div>
+</div>

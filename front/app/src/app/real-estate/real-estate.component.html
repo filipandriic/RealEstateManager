@@ -1,0 +1,223 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" routerLink='/buyer'>KupujemProdajem.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbareal_estateupportedContent" aria-controls="navbareal_estateupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbareal_estateupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink='/buyer'>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='/buyer/favourites'>Favourites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='/buyer/info'>Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="form-wrapper col-sm-12">
+            <div class="white-panel users-window col-sm-12 col-md-12 col-lg-12">
+                <div class="real_estate_info col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-show col-sm-4 col-md-4 users-show">
+                        <ngb-carousel>
+                            <ng-template ngbSlide *ngFor='let img of real_estate.images'>
+                                <img [src]="img" alt="">
+
+                            </ng-template>
+                        </ngb-carousel>
+                    </div>
+                    <div class="real_estate_text col-sm-2 col-md-2 col-lg-2">
+
+                        <input type="text" name="" id="real_estate_name" [disabled]='true'
+                            [(ngModel)]='real_estate.name' class="form-input">
+                        <label for="real_estate_name">Type</label>
+
+
+                        <input type="number" name="" id="real_estate_area" [disabled]='true'
+                            [(ngModel)]='real_estate.area' class="form-input">
+                        <label for="real_estate_area">Area</label>
+
+
+                        <input type="number" name="" id="real_estate_rooms" [disabled]='true'
+                            [(ngModel)]='real_estate.rooms' class="form-input">
+                        <label for="real_estate_rooms">Rooms</label>
+
+                        <input type="number" name="" id="real_estate_construction_year" [disabled]='true'
+                            [(ngModel)]='real_estate.construction_year' class="form-input">
+                        <label for="real_estate_construction_year">Construction year</label>
+
+                        <input type="text" name="" id="real_estate_parking" [disabled]='true'
+                            [(ngModel)]='real_estate.parking' class="form-input">
+                        <label for="real_estate_parking">Parking</label>
+                    </div>
+                    <div class="real_estate_text col-sm-2 col-md-2 col-lg-2">
+
+                        <input type="text" name="" id="real_estate_city" [disabled]='true'
+                            [(ngModel)]='real_estate.city' class="form-input">
+                        <label for="real_estate_city">City</label>
+
+
+                        <input type="text" name="" id="real_estate_municipality" [disabled]='true'
+                            [(ngModel)]='real_estate.municipality' class="form-input">
+                        <label for="real_estate_municipality">Municipality</label>
+
+
+                        <input type="text" name="" id="real_estate_microlocation" [disabled]='true'
+                            [(ngModel)]='real_estate.microlocation' class="form-input">
+                        <label for="real_estate_microlocation">Microlocation</label>
+
+
+                        <input type="text" name="" id="real_estate_street" [disabled]='true'
+                            [(ngModel)]='real_estate.street' class="form-input">
+                        <label for="real_estate_street">Street</label>
+
+                        <input type="number" name="" id="real_estate_monthly_utilities" [disabled]='true'
+                            [(ngModel)]='real_estate.monthly_utilities' class="form-input">
+                        <label for="real_estate_monthly_utilities">Monthly utilities</label>
+                    </div>
+                    <div class="real_estate_text col-sm-2 col-md-2 col-lg-2">
+
+                        <input type="text" name="" id="real_estate_state" [disabled]='true'
+                            [(ngModel)]='real_estate.state' class="form-input">
+                        <label for="real_estate_state">State</label>
+
+
+                        <input type="text" name="" id="real_estate_heating" [disabled]='true'
+                            [(ngModel)]='real_estate.heating' class="form-input">
+                        <label for="real_estate_heating">Heating</label>
+
+
+                        <input type="number" name="" id="real_estate_floor" [disabled]='true'
+                            [(ngModel)]='real_estate.floor' class="form-input">
+                        <label for="real_estate_floor">Floor</label>
+
+
+                        <input type="number" name="" id="real_estate_total_floors" [disabled]='true'
+                            [(ngModel)]='real_estate.total_floors' class="form-input">
+                        <label for="real_estate_total_floors">Total number of floors</label>
+
+                        <input type="number" name="" id="real_estate_price" [disabled]='true'
+                            [(ngModel)]='real_estate.price' class="form-input red_price"
+                            [ngClass]="{'green_price': is_cheaper()==true }">
+                        <label for="real_estate_price">Price</label>
+                    </div>
+                </div>
+                <div class="real_estate_bottom col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-sm-2">
+                        <input type="number" name="" id="rs_price" [disabled]='true' [ngModel]="calc_average_price()"
+                            class="form-input">
+                        <label for="rs_price">Average price per square</label>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 flexy">
+                        <div *ngFor='let c of all_characteristics' class="col-sm-1 col-md-1 col-lg-1">
+                            <button class="checkbox_input"
+                                [ngClass]="{'green_button': has_characteristic(c.name)==true }"
+                                [disabled]="true">{{c.name}}</button>
+                        </div>
+                    </div>
+
+                    <textarea name="" id="about" [disabled]='true' [(ngModel)]='real_estate.about'
+                        class="form-input"></textarea>
+                    <label for="about">About</label>
+
+                    <hr>
+                    <label for="">Avertiser</label>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div *ngIf="agency==null; else agency_advert" class="flexy col-sm-12 col-md-8 col-lg-4">
+                            <div>
+                                <input type="text" name="" id="advr_first_name" [disabled]='true'
+                                    [(ngModel)]='advertiser.first_name' class="form-input">
+                                <label for="advr_first_name">First name</label>
+                            </div>
+
+                            <div>
+                                <input type="text" name="" id="advr_last_name" [disabled]='true'
+                                    [(ngModel)]='advertiser.last_name' class="form-input">
+                                <label for="advr_last_name">Last name</label>
+                            </div>
+                        </div>
+                        <ng-template #agency_advert>
+                            <div class="flexy col-sm-12 col-md-12 col-lg-8">
+                                <div>
+                                    <input type="text" name="" id="advr_name" [disabled]='true'
+                                        [(ngModel)]='agency.name' class="form-input">
+                                    <label for="advr_name">Name</label>
+                                </div>
+
+                                <div>
+                                    <input type="text" name="" id="advr_address" [disabled]='true'
+                                        [(ngModel)]='agency.address' class="form-input">
+                                    <label for="advr_address">Address</label>
+                                </div>
+
+                                <div>
+                                    <input type="text" name="" id="advr_city" [disabled]='true'
+                                        [(ngModel)]='agency.city' class="form-input">
+                                    <label for="advr_city">City</label>
+                                </div>
+
+                                <div>
+                                    <input type="text" name="" id="advr_PIB" [disabled]='true' [(ngModel)]='agency.PIB'
+                                        class="form-input">
+                                    <label for="advr_PIB">PIB</label>
+                                </div>
+
+
+                            </div>
+                            <div class="flexy col-sm-12 col-md-12 col-lg-6">
+                                <div>
+                                    <input type="text" name="" id="advr_first_name" [disabled]='true'
+                                        [(ngModel)]='advertiser.first_name' class="form-input">
+                                    <label for="advr_first_name">First name</label>
+                                </div>
+
+                                <div>
+                                    <input type="text" name="" id="advr_last_name" [disabled]='true'
+                                        [(ngModel)]='advertiser.last_name' class="form-input">
+                                    <label for="advr_last_name">Last name</label>
+                                </div>
+
+                                <div>
+                                    <input type="text" name="" id="advr_license" [disabled]='true'
+                                        [(ngModel)]='advertiser.license' class="form-input">
+                                    <label for="advr_license">License</label>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <div class="flexy col-sm-12 col-md-12 col-lg-4">
+                            <button class="form-button" (click)="show_contact()" style="margin-top: 10px;">Show
+                                contact</button>
+                            <div style="width: 50%;">
+                                <div *ngIf="is_show_contact">
+                                    <input type="text" name="" id="advr_phone" [disabled]='true'
+                                        [(ngModel)]='advertiser.phone' class="form-input">
+                                    <label for="advr_phone">Phone</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <button *ngIf="in_favourites==false; else fav" (click)="add_to_favourites()" class="form-button">Add
+                        to favourites</button>
+
+                    <ng-template #fav>
+                        <button disabled class="form-button yellow_button">Favourite</button>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+{"version":3,"file":"characteristic.js","sourceRoot":"","sources":["../../src/models/characteristic.ts"],"names":[],"mappings":";;;;;AAAA,wDAA+B;AAE/B,MAAM,MAAM,GAAG,kBAAQ,CAAC,MAAM,CAAC;AAE/B,IAAI,cAAc,GAAG,IAAI,MAAM,CAAC;IAC5B,IAAI,EAAE;QACF,IAAI,EAAE,MAAM;KACf;CACJ,CAAC,CAAA;AAEF,kBAAe,kBAAQ,CAAC,KAAK,CAAC,gBAAgB,EAAE,cAAc,EAAE,iBAAiB,CAAC,CAAC"}

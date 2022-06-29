@@ -1,0 +1,141 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" routerLink='/buyer'>KupujemProdajem.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink='/buyer'>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='/buyer/favourites'>Favourites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='/buyer/info'>Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="form-wrapper col-sm-12 outer">
+            <div class="white-panel col-sm-3 col-md-3 col-lg-3">
+                <div class="form-show col-sm-12">
+                    <div class="flexy">
+                        <h2>SEARCH</h2>
+                        <button (click)="advanced_search()" class="checkbox_input">ADVANCED SEARCH</button>
+                    </div>
+                    <hr>
+                    <div>
+                        <select name="" id="" [(ngModel)]='name' (change)='search_real_estates()' class="form-input">
+                            <option value="" disabled>Type</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="House">House</option>
+                            <option value="Weekend cottage">Weekend cottage</option>
+                            <option value="Shop">Shop</option>
+                            <option value="Warehouse">Warehouse</option>
+                        </select>
+                        <input type="text" name="" id="" [(ngModel)]='city' placeholder="City"
+                            (change)='search_real_estates()' class="form-input">
+
+                        <input type="text" name="" id="" [(ngModel)]='municipality' placeholder="Municipality"
+                            (change)='search_real_estates()' class="form-input">
+
+                        <input type="text" name="" id="" [(ngModel)]='microlocation' placeholder="Microlocation"
+                            (change)='search_real_estates()' class="form-input">
+
+                        <input type="number" name="" id="" [(ngModel)]='price' (change)='search_real_estates()'
+                            placeholder="Maximum price" class="form-input">
+
+                        <input type="number" name="" id="" [(ngModel)]='area' (change)='search_real_estates()'
+                            placeholder="Minimum area" class="form-input">
+
+                        <input type="number" name="" id="" [(ngModel)]='rooms' (change)='search_real_estates()'
+                            placeholder="Minimum number of rooms" class="form-input">
+                    </div>
+
+                </div>
+
+                
+            </div>
+            <div class="panel-wrap col-sm-8 col-md-8 col-lg-8 users-window" style="background: rgb(224, 224, 224);">
+                <h2 style="width: 100%;">RESULTS</h2>
+                <hr>
+                <div *ngFor='let rs of real_estates'>
+                    <div class="white-panel users-window col-sm-12 col-md-12 col-lg-12">
+                        <div class="real_estate_info col-sm-12 col-md-12 col-lg-12">
+                            <div class="col-sm-4 col-md-4 users-show">
+                                <ngb-carousel>
+                                    <ng-template ngbSlide *ngFor='let img of rs.images'>
+                                        <img [src]="img" alt="">
+                                    </ng-template>
+                                </ngb-carousel>
+                            </div>
+                            <div class="real_estate_text col-sm-2 col-md-2 col-lg-2">
+
+                                <input type="text" name="" id="rs_name" [disabled]='true' [(ngModel)]='rs.name'
+                                    class="form-input">
+                                <label for="rs_name">Type</label>
+
+
+                                <input type="number" name="" id="rs_area" [disabled]='true'
+                                    [(ngModel)]='rs.area' class="form-input">
+                                <label for="rs_area">Area</label>
+
+
+                                <input type="number" name="" id="rs_rooms" [disabled]='true'
+                                    [(ngModel)]='rs.rooms' class="form-input">
+                                <label for="rs_rooms">Rooms</label>
+
+
+                            </div>
+                            <div class="real_estate_text col-sm-2 col-md-2 col-lg-2">
+
+                                <input type="text" name="" id="rs_city" [disabled]='true' [(ngModel)]='rs.city'
+                                    class="form-input">
+                                <label for="rs_city">City</label>
+
+
+                                <input type="text" name="" id="rs_municipality" [disabled]='true'
+                                    [(ngModel)]='rs.municipality' class="form-input">
+                                <label for="rs_municipality">Municipality</label>
+
+
+                                <input type="text" name="" id="rs_microlocation" [disabled]='true'
+                                    [(ngModel)]='rs.microlocation' class="form-input">
+                                <label for="rs_microlocation">Microlocation</label>
+
+                            </div>
+                            <div class="real_estate_text col-sm-2 col-md-2 col-lg-2">
+
+                                <input type="text" name="" id="rs_state" [disabled]='true'
+                                    [(ngModel)]='rs.state' class="form-input">
+                                <label for="rs_state">State</label>
+
+
+                                <input type="number" name="" id="rs_floor" [disabled]='true'
+                                    [(ngModel)]='rs.floor' class="form-input">
+                                <label for="rs_floor">Floor</label>
+
+                                <input type="number" name="" id="rs_price" [disabled]='true'
+                                [ngModel]="calc_average_price(rs)" class="form-input">
+                                <label for="rs_price">Average price per square</label>
+                            </div>
+                        </div>
+                        <div class="real_estate_bottom col-sm-12 col-md-12 col-lg-12">
+                            <hr>
+                            <button (click)="view_more(rs)" class="form-button">View more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" routerLink='/buyer'>KupujemProdajem.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink='/buyer'>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='/buyer/favourites'>Favourites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='/buyer/info'>Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="form-wrapper col-sm-12 outer">
+            <div class="white-panel col-sm-4 col-md-4 col-lg-4">
+                <div class="form-show col-sm-12">
+                    <div class="flexy">
+                        <img [src]='user.image' alt="">
+                        <h2>{{user.first_name}} {{user.last_name}}</h2>
+                    </div>
+                    <hr>
+                    <input type="text" name="" id="username" [disabled]="true" [(ngModel)]='user.username'
+                        class="form-input">
+                    <label for="username">Username</label>
+                    <input type="text" name="" id="city" [disabled]="true" [(ngModel)]='user.city' class="form-input">
+                    <label for="city">City</label>
+                    <input type="text" name="" id="birthday" [disabled]="true" [(ngModel)]='formatted_date'
+                        class="form-input">
+                    <label for="birthday">Birthday</label>
+                    <input type="text" name="" id="phone" [disabled]="true" [(ngModel)]='user.phone' class="form-input">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="" id="email" [disabled]="true" [(ngModel)]='user.email' class="form-input">
+                    <label for="email">E-mail</label>
+                    <hr>
+
+                    
+                    <input type='checkbox' id="change_pass" name='type' [(ngModel)]='change_password_window'
+                        style="display: none;">
+                    <label for="change_pass" class="checkbox_input">Change password</label>
+                    <div class="col-sm-12" *ngIf='change_password_window==true'>
+                        <input type="password" name="" id="" [(ngModel)]='old_password' placeholder="Old password"
+                            class="form-input">
+                        <input type="password" name="" id="" [(ngModel)]='new_password' placeholder="New password"
+                            class="form-input">
+                        <input type="password" name="" id="" [(ngModel)]='confirm_password'
+                            placeholder="Confirm password" class="form-input">
+                        <button (click)='change_password()' class="form-button">Change password</button>
+                        <span style="color: red;">{{message}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

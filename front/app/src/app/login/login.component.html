@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="form-wrapper col-sm-12">
+
+            <div class="white-panel col-sm-4 pics">
+                <div class="form-show col-sm-12">
+                    <ngb-carousel>
+                        <ng-template ngbSlide *ngFor='let rs of real_estates'>
+                            <img [src]="images[real_estates.indexOf(rs)]" alt="">
+                            <div class="carousel-caption" style="color: white;">
+                                <h3>{{rs.name}}</h3>
+                                <h5>{{rs.price}}</h5>
+                                <h5>{{rs.bus_lines}}</h5>
+                            </div>
+                        </ng-template>
+                    </ngb-carousel>
+                </div>
+            </div>
+
+            <div class="login-reg-panel col-sm-12">
+                <div class="col-sm-2 offset-9 register-info-box">
+                    <h2>Don't have an account?</h2>
+                    <label id="label-login" routerLink='register'>Register</label>
+                </div>
+
+                <div class="white-panel col-sm-6 offset-1">
+                    <div class="form-show col-sm-12">
+                        <h2>LOGIN</h2>
+                        <input type='text' name='username' placeholder="Username" [(ngModel)]='username' class="form-input">
+                        <input type='password' name='password' placeholder="Password" [(ngModel)]='password'
+                            class="form-input">
+                        
+                        <button (click)='login()' class="form-button">Login</button>
+                        <span class="error">{{message}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css?family=Mukta');
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+ngb-carousel {
+    max-width: 700px;
+    /* margin: auto; */
+}
+ngb-carousel img {
+    max-width: 300px;
+    outline: none;
+    margin: auto;
+}
+ngb-carousel {
+    /* width: 400px; */
+    height: 400px;
+}
+
+.carousel-inner .sr-only {
+    display: none;
+}
+
+.carousel-inner {
+    overflow: visible;
+}
+.carousel-item {
+    display: flex !important;
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.2s ease-in-out, visibility 1.2s;
+    z-index: -1;
+}
+.carousel-item.active{
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+}
+.carousel-control-prev {
+    z-index: 20;
+}
+
+.carousel-control-next {
+    z-index: 20;
+}
+.carousel-indicators{
+    z-index: 20;
+}
+
+.carousel-indicators li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    text-indent: 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background-color: gray;
+    box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);    
+}
+.carousel-indicators .active {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    background-color: lightgray;
+}
+
+.error {
+    font-family: 'Mukta', sans-serif;
+    color: rgb(236, 48, 20);
+    width: 100%;
+    display: block;
+    margin: 20px 0 0 0;
+    /* padding: 15px; */
+}    
+  
+.form-show {
+    color:#242424; 
+    text-align:left;
+    padding:50px;
+}
+
+.form-input {
+    width: 100%;
+    display: block;
+    margin:20px 0;
+    padding: 15px;
+    border: 1px solid #b5b5b5;
+    outline: none;
+}
+.form-button {
+    max-width: 150px;
+    width: 100%;
+    background: #333;
+    color: #f9f9f9;
+    border: 1px solid #CCC;
+    padding: 10px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    float:right;
+    cursor:pointer;
+}
+
+.form-wrapper {
+    font-family: 'Mukta', sans-serif;
+    height:90em;
+    background-image: url('./assets/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 15% 15%;
+    position:relative;
+    overflow-y: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form-button:hover {
+    background: rgb(236, 48, 20);
+}
+
+.white-panel {
+    background-color: rgba(255,255, 255, 1);
+    transition:.3s ease-in-out;
+    box-shadow: 0 0 15px 9px #00000096;
+    display: flex;
+    align-items: center;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.outer {
+    /* border: 1px solid #000; */
+    display:flex;
+    justify-content: center;
+    padding: 3px;
+}
+.outer > div {
+    /* border: 1px solid #000; */
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navbar-light {
+    background-color: rgb(236, 48, 20);
+}
+
+.navbar-brand {
+    color: azure !important;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 22px !important;
+}
+
+.nav-item > a:hover {
+    color: gray !important;
+}
+
+.nav-link {
+    color: azure !important;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.real_estate_info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.real_estate_text {
+    display: block;
+    margin-right: 10px;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

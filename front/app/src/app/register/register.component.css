@@ -1,0 +1,42 @@
+re-captcha.is-invalid > div {
+  border: 1px solid #dc3545 !important;
+  border-radius: 0.2rem;
+}
+
+.file_input {
+
+  max-width: 150px;
+  width: 100%;
+  background: #333;
+  color: #f9f9f9;
+  border: 1px solid #CCC;
+  padding: 10px;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.file_input:hover {
+  background: rgb(236, 48, 20);
+}
+
+.checkbox_input {
+  max-width: 150px;
+  width: 100%;
+  background: #333;
+  color: #f9f9f9;
+  border: 1px solid #CCC;
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+}
+
+.green_button {
+  background: darkgreen;
+}
+
+.checkbox_input:hover {
+  background: rgb(236, 48, 20);
+}

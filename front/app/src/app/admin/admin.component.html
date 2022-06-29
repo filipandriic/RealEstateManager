@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" routerLink='/admin'>KupujemProdajem.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink='/admin'>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='users'>Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="form-wrapper col-sm-12 outer">
+            <div class="white-panel col-sm-4 col-md-4 col-lg-3">
+                <div class="form-show col-sm-12">
+                    <h2>REMOVE MICROLOCATION</h2>
+                    <select name="" id="" [(ngModel)]='remove_micro_name' class="form-input">
+                        <option value="" disabled selected>Microlocation</option>
+                        <option *ngFor='let a of all_microlocations' value='{{a.name}}'>{{a.name}}</option>
+                    </select>
+                    <button (click)='remove_microlocation()' class="form-button">Remove microlocation</button>
+                    <span class="error">{{remove_micro_message}}</span>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-3 vertical_outer">
+                <div class="white-panel col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-show col-sm-12">
+                        <h2>ADD MICROLOCATION</h2>
+                        <select name="" id="" [(ngModel)]='muni_name' class="form-input">
+                            <option value="" disabled selected>Municipality</option>
+                            <option *ngFor='let a of all_municipalities' value='{{a.name}}'>{{a.name}}</option>
+                        </select>
+                        <input type='text' name='micro_name' [(ngModel)]='micro_name' placeholder="Name" class="form-input">
+                        <button (click)='add_microlocation()' class="form-button">Add microlocation</button>
+                        <span class="error">{{micro_message}}</span>
+                    </div>
+                </div>
+                <br>
+                <div class="white-panel col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-show col-sm-12">
+                        <h2>ADD STREET</h2>
+                        <select name="" id="" [(ngModel)]='microlocation' class="form-input">
+                            <option value="" disabled selected>Microlocation</option>
+                            <option *ngFor='let a of all_microlocations' value='{{a.name}}'>{{a.name}}</option>
+                        </select>
+                        <input type='text' name='street' [(ngModel)]='street' placeholder="Name" class="form-input">
+                        <button (click)='add_street()' class="form-button">Add street</button>
+                        <span class="error">{{street_message}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="white-panel col-sm-4 col-md-4 col-lg-3">
+                <div class="form-show col-sm-12">
+                    <h2>ADD AGENCY</h2>
+                    <input type='text' name='name' [(ngModel)]='name' placeholder="Name" class="form-input">
+                    <input type='text' name='address' [(ngModel)]='address' placeholder="Address" class="form-input">
+                    <input type='text' name='city' [(ngModel)]='city' placeholder="City" class="form-input">
+                    <input type='text' name='contact' [(ngModel)]='contact' placeholder="Contact" class="form-input">
+                    <input type='text' name='PIB' [(ngModel)]='PIB' placeholder="PIB" class="form-input">
+                    <button (click)='add_agency()' class="form-button">Add agency</button>
+                    <span class="error">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

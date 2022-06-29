@@ -1,0 +1,153 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" routerLink='/agent'>KupujemProdajem.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink='/agent'>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='/agent/myRealEstates'>Real estates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink='/agent/info'>Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="form-wrapper col-sm-12">
+            <div class="white-panel col-sm-8 col-md-6 col-lg-4 users-window">
+                <div class="form-show col-sm-12 users-show">
+                    <h2>ADD REAL ESTATE</h2>
+                    <label for="json_select" class="checkbox_input"
+                        [ngClass]="{'green_button': add_with_json==true }">Use json</label>
+                    <input type="checkbox" name="" id="json_select" [(ngModel)]='add_with_json' style="display: none;">
+
+                    <div *ngIf='add_with_json == false; else enable_json'>
+                        <select name="" id="" [(ngModel)]='name' class="form-input">
+                            <option value="" disabled>Type</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="House">House</option>
+                            <option value="Weekend cottage">Weekend cottage</option>
+                            <option value="Shop">Shop</option>
+                            <option value="Warehouse">Warehouse</option>
+                        </select>
+
+                        <select name="" id="" [(ngModel)]='city' class="form-input" (change)="get_municipalities(city)">
+                            <option value="" disabled>City</option>
+                            <option *ngFor="let c of all_cities" value="{{c.name}}">{{c.name}}</option>
+                        </select>
+
+                        <select name="" id="" [(ngModel)]='municipality' class="form-input" (change)="get_microlocations(municipality)">
+                            <option value="" disabled>Municipality</option>
+                            <option *ngFor="let c of all_municipalities" value="{{c}}">{{c}}</option>
+                        </select>
+
+                        <select name="" id="" [(ngModel)]='microlocation' class="form-input" (change)="get_streets(microlocation)">
+                            <option value="" disabled>Microlocation</option>
+                            <option *ngFor="let c of all_microlocations" value="{{c}}">{{c}}</option>
+                        </select>
+
+                        <select name="" id="" [(ngModel)]='street' class="form-input">
+                            <option value="" disabled>Street</option>
+                            <option *ngFor="let c of all_streets" value="{{c}}">{{c}}</option>
+                        </select>
+                        <input type="number" name="area" [(ngModel)]='area' placeholder="Area" class="form-input">
+                        <input type="number" name="rooms" [(ngModel)]='rooms' placeholder="Number of rooms"
+                            class="form-input">
+                        <input type="number" name="" id="" [(ngModel)]='construction_year'
+                            placeholder="Construction year" class="form-input">
+
+                        <select name="" id="" [(ngModel)]='state' class="form-input">
+                            <option value="" disabled>State</option>
+                            <option value="source">Source</option>
+                            <option value="renovated">Renovated</option>
+                            <option value="lux">LUX</option>
+                        </select>
+
+                        <select name="" id="" [(ngModel)]='heating' class="form-input">
+                            <option value="" disabled>Heating</option>
+                            <option value="cg">CG</option>
+                            <option value="eg">EG</option>
+                            <option value="ta">TA</option>
+                            <option value="gas">Gas</option>
+                            <option value="floor">Floor</option>
+                            <option value="heating pumps">Heating pumps</option>
+                        </select>
+                        <input type="number" name="" id="" [(ngModel)]='floor' placeholder="Floor" class="form-input">
+                        <input type="number" name="" id="" [(ngModel)]='total_floors'
+                            placeholder="Total number of floors" class="form-input">
+                        <input type="text" name="" id="" [(ngModel)]='parking' placeholder="Parking" class="form-input">
+                        <input type="number" name="" id="" [(ngModel)]='monthly_utilities'
+                            placeholder="Monthly utilities" class="form-input">
+                        <input type="number" name="" id="" [(ngModel)]='price' placeholder="Price" class="form-input">
+                        <textarea name="" id="" cols="30" rows="10" [(ngModel)]='about' placeholder="About"
+                            class="form-input">
+                        </textarea>
+                        <div class="characteristics">
+                            <div *ngFor='let c of all_characteristics'>
+                                <label for="{{c.name}}" class="checkbox_input"
+                                    [ngClass]="{'green_button': has_characteristic(c.name)==true }">{{c.name}}</label>
+                                <input type="checkbox" id="{{c.name}}" value="{{c.name}}"
+                                    (change)='add_characteristic(c.name)' style="display: none;">
+                            </div>
+                        </div>
+                        <select name="" id="" [(ngModel)]='bus_lines' multiple="multiple" class="form-input">
+                            <option value="" disabled>Bus lines</option>
+                            <option *ngFor="let bus of all_bus_lines" value="{{bus}}">{{bus}}</option>
+                        </select>
+
+                        <hr>
+                        <input type="file" multiple='multiple' name="" id="images" (change)='on_images_select($event)'
+                        style="display: none;">
+                        <label for="images" class="file_input">{{image_select}}</label>
+                        <button (click)='add_real_estate()' class="form-button">Add real estate</button>
+                    </div>
+                    <ng-template #enable_json>
+                        <mat-horizontal-stepper>
+
+                            <mat-step label="Import json file">
+                                <div style="margin-top: 10px;">
+                                    <input type="file" id="json" (change)='on_json_select($event)' style="display: none;">
+                                    <label for="json" class="file_input" style="display: block;">{{json_select}}</label>
+                                </div>
+                            </mat-step>
+                          
+                            <mat-step label="Step 2">
+                              <div style="margin-top: 10px;">
+                                <input type="file" multiple='multiple' name="" id="images" (change)='on_images_select($event)'
+                                style="display: none;">
+                                <label for="images" class="file_input">{{image_select}}</label>
+                              </div>
+                            </mat-step>
+                          
+                            <mat-step label="Step 3">
+                              <div style="margin-top: 10px;">
+                                <button (click)='add_real_estate()' class="form-button">Add real estate</button>
+                              </div>
+                            </mat-step>
+                            
+                          </mat-horizontal-stepper>
+                        
+                        
+                    </ng-template>
+
+                    
+                    
+                    
+                    <span class="error">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

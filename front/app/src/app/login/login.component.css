@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Mukta');
+.login-reg-panel {
+    position: relative;
+    top: 0%;
+    transform: translateY(70%);
+	text-align:center;
+    width: 60%;
+	right:0;left:0;
+    margin:auto;
+    height:400px;
+    background-color: rgba(236, 48, 20, 0.9);
+}
+.white-panel {
+    background-color: rgba(255,255, 255, 1);
+    height:500px;
+    position:absolute;
+    top: -50px;
+    transition:.3s ease-in-out;
+    z-index:0;
+    box-shadow: 0 0 15px 9px #00000096;
+    margin-top: 0px;
+}
+
+.login-reg-panel {
+    color:#B8B8B8;
+}
+.login-reg-panel #label-login {
+    border:1px solid #9E9E9E;
+    padding:5px 5px;
+    /* width:150px; */
+    display:block;
+    text-align:center;
+    border-radius:10px;
+    /* cursor:pointer; */
+    font-weight: 600;
+    font-size: 18px;
+}
+.login-info-box {
+    width:30%;
+    padding:0 50px;
+    top:20%;
+    left:0;
+    position:absolute;
+    text-align:left;
+}
+.register-info-box {
+    /* width:30%; */
+    /* padding:0 50px; */
+    padding-top: 20px;
+    /* right:0; */
+    /* position:absolute; */
+    /* text-align:left; */
+    
+}
+
+.pics {
+    top: 200px;
+}
